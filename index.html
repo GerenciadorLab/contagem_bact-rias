@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contador de Colônias Bacterianas</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="https://docs.opencv.org/4.5.5/opencv.js" as="script">
     <script async src="https://docs.opencv.org/4.5.5/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
     <script src="script.js" defer></script>
 </head>
@@ -15,20 +16,29 @@
         <div class="upload-area" id="dropZone">
             <input type="file" id="imageInput" accept="image/*">
             <label for="imageInput">Arraste ou clique para enviar uma imagem</label>
-            <p>Formatos suportados: JPG, PNG</p>
+            <p>Formatos suportados: JPG, PNG (máx. 2000x2000px)</p>
         </div>
         
         <div class="controls">
-            <label for="minSize">Tamanho mínimo (px):</label>
-            <input type="range" id="minSize" min="1" max="50" value="5">
-            <span id="minSizeValue">5</span>
+            <div class="control-group">
+                <label for="minSize">Tamanho mínimo (px): <span id="minSizeValue">10</span></label>
+                <input type="range" id="minSize" min="1" max="50" value="10">
+            </div>
             
-            <label for="threshold">Sensibilidade:</label>
-            <input type="range" id="threshold" min="0" max="255" value="100">
-            <span id="thresholdValue">100</span>
+            <div class="control-group">
+                <label for="threshold">Sensibilidade: <span id="thresholdValue">120</span></label>
+                <input type="range" id="threshold" min="50" max="200" value="120">
+            </div>
             
-            <button id="processBtn" disabled>Processar Imagem</button>
-            <button id="resetBtn">Limpar</button>
+            <div class="buttons">
+                <button id="processBtn" disabled>Processar Imagem</button>
+                <button id="resetBtn">Limpar</button>
+            </div>
+        </div>
+        
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Processando imagem...</p>
         </div>
         
         <div class="results">
@@ -42,6 +52,8 @@
                 <div id="result">Colônias detectadas: <span>0</span></div>
             </div>
         </div>
+        
+        <div id="errorBox" class="error-box" style="display: none;"></div>
     </div>
 </body>
 </html>
