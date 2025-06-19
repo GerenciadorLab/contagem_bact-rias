@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Colônias Bacterianas</title>
+    <link rel="stylesheet" href="styles.css">
+    <script async src="https://docs.opencv.org/4.5.5/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Contador de Colônias Bacterianas</h1>
+        
+        <div class="upload-area" id="dropZone">
+            <input type="file" id="imageInput" accept="image/*">
+            <label for="imageInput">Arraste ou clique para enviar uma imagem</label>
+            <p>Formatos suportados: JPG, PNG</p>
+        </div>
+        
+        <div class="controls">
+            <label for="minSize">Tamanho mínimo (px):</label>
+            <input type="range" id="minSize" min="1" max="50" value="5">
+            <span id="minSizeValue">5</span>
+            
+            <label for="threshold">Sensibilidade:</label>
+            <input type="range" id="threshold" min="0" max="255" value="100">
+            <span id="thresholdValue">100</span>
+            
+            <button id="processBtn" disabled>Processar Imagem</button>
+            <button id="resetBtn">Limpar</button>
+        </div>
+        
+        <div class="results">
+            <div class="image-container">
+                <h3>Imagem Original</h3>
+                <canvas id="originalCanvas"></canvas>
+            </div>
+            <div class="image-container">
+                <h3>Imagem Processada</h3>
+                <canvas id="processedCanvas"></canvas>
+                <div id="result">Colônias detectadas: <span>0</span></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
